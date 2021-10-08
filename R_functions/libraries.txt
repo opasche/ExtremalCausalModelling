@@ -1,0 +1,3 @@
+install.packages(c("tidyverse","evd","ismev", "boot", "EnvStats", "maxLik","foreach", "doParallel", "doFuture", "here", "ggpubr", "latex2exp"))
+install.packages("devtools")
+devtools::install_github("nicolagnecco/causalXtreme")

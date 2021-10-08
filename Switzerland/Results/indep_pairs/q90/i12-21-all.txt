@@ -1,0 +1,44 @@
+
+=================== Stations Estimated GPD Parameters ===================
+
+Independent pair:
+     Station    scale  se_scale     shape   se_shape Convergence Elevation
+1 station_12 3.905882 0.5016738 0.2440168 0.10070942  successful       406
+2 station_21 6.560339 0.8155893 0.2089783 0.09483693  successful       426
+       Ave
+1 4.295143
+2 5.618327
+With Precipitation:
+     scale se_scale       shape   se_shape Convergence
+1 6.586526 0.252236 0.005283969 0.02642954  successful
+
+
+=================== Bootstrapping Discharge data (NP CTC) ===================
+
+Non-parametric Causal tail coeffs for "independent" pair station_12station_21 (n=2944, k=36):
+Monte Carlo Permutation test (R = 10000): Pmc = 0.5146485
+
+
+
+=================== Bootstrapping Discharge data (unconstrained LGPD CTC) ===================
+
+LGPD Causal tail coeffs for "independent" pair station_12station_21 (n=2403, k=33):
+Monte Carlo Permutation test (R = 10000): Pmc = 0.4985501
+
+
+
+=================== Bootstrapping Discharge data (constrained LGPD CTC) ===================
+
+LGPD Causal tail coeffs for "independent" pair station_12station_21 (n=2403, k=33):
+Monte Carlo Permutation test (R = 10000): Pmc = 0.50035
+
+
+
+=================== Bootstrapping Discharge data (exp GPD CTC) ===================
+
+GPD Causal tail coeffs for "independent" pair station_12station_21 (n=2403, k=33):
+Monte Carlo Permutation test (R = 10000): Pmc = 0.7209279
+
+
+Run time:
+Time difference of 31.32753 secs
