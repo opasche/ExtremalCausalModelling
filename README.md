@@ -16,6 +16,8 @@ The `R_functions/` folder contains the necessary R functions to compute the caus
 The `Simulations/` folder contains all the code and results related to the simulations for the non-parametric and parametric estimators.
 - `CTCs_simulations.R` is the script used for the simulations of all causal tail coefficient estimators on the the three distributions and different tails (to change on lines 29-31). The outputs are avaliable in .RData format in the subfolder `CTCs_Simulations/`.
 - `plot_CTCs_simulations_onelab_ALL.R` is used to plot the results for these simulations, for one or multiple distribution choices. The figures are avaliable in the `Results/CTCs_Simulations/` subfolder.
+- `CTCs_Permutation_test_power.R` is the script used for the simulations of the permutation test for causality. The outputs are avaliable in .RData format in the subfolder `CTCs_Simulations/Permutation_tests/`.
+- `plot_test_power_merged.R` is used to plot the results for the permutation test power simulations. The figures are avaliable in the `Results/Permutation_tests/` subfolder.
 - `bootstrap_CTC_boxplots.R` is used to create the boxplots illustrating the bootstrap distribution of the difference statistic and its limitations.
 - `old/LGPD_scale_constraints.R` (deprecated) contains tests for the behaviour of the GPD fit with box and linear constraints. Some outputs are avaliable in the `Results/constrained_lgpdctc/` subfolder.
 - `old/LGPD_CTC_ParametersAnalysis.R` (deprecated) outputs the maximum liklihood estimated parameters for all versions of the LGPD causal tail coefficient estimators (post-fit correction, linear constraints and box-constraints in the student case). Some outputs are avaliable in the `Results/lgpdctc_ParametersAnalysis/` subfolder.
