@@ -26,7 +26,7 @@ The `Simulations/` folder contains all the code and results related to the simul
 The `Switzerland/` folder contains the code and results related to the exploratory and causal analysis of the river discharge data.
 - `Switzerland_exploration.ipynb` contain the explorataory data analysis for both discharge and precipitation data (basic statistics, dates range and missing values, creation of the interactive maps, time series plots, ...)
 - `Stations_webscraping.ipynb` contains the code used to web-scrape additional information about the sations and to convert coordinates, from the official Swiss websites and online services (links in the code).
-- `Swiss_SumerDischarges_CTC_causal.R` and `Swiss_SumerDischarges_CTC_indep.R` contain the functional code for the causal analysis of causal and non-causal station pairs, respectively.
+- `Swiss_SumerDischarges_CTCs_routine.R` contains the functional code for the causal analysis of station pairs, with (optionnal) esthetical wrappers for causal and non-causal station pair types, respectively.
 - `Stations_runner.R` runs the causal analysis functions for a list of given station pairs.
 - `Swiss_SumerDischarges_estims_plots.R` creates some summary plots and shape parameter estimates analyses. 
 - The `Results/` subfolders contain some outputs from the python and R codes, such as the interactive maps in .html format (need to be downloaded and opened in a web-browser), and results discussed in the paper.
