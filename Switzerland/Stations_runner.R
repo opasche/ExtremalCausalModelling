@@ -1,3 +1,6 @@
+#rm(list = setdiff(ls(), union(lsf.str(), "sims_round")))
+#try(dev.off(dev.list()["RStudioGD"]),silent=TRUE)
+#try(dev.off(),silent=TRUE)
 library(parallel)
 library(doParallel)
 
@@ -13,8 +16,9 @@ library(boot)
 library(ggpubr)
 
 source("../R_functions/CTC_contribution_functions_OCP.R")
-source("Swiss_SumerDischarges_CTC_causal.R")
-source("Swiss_SumerDischarges_CTC_indep.R")
+#source("Swiss_SumerDischarges_CTC_causal.R")# DEPRECATED
+#source("Swiss_SumerDischarges_CTC_indep.R")# DEPRECATED
+source("Swiss_SumerDischarges_CTCs_routine.R")
 
 start_time_all <- Sys.time()
 
@@ -116,7 +120,7 @@ variables_to_pass <- c("n_bootstrap_sims", "R_test", "thresh_q", "mult_k", "seed
 results_causal <- foreach(params=params_list_causal, .packages=packages_to_pass, .export=variables_to_pass,
                           .errorhandling="stop", .combine=rbind) %dopar% {
   source("../R_functions/CTC_contribution_functions_OCP.R")
-  source("Swiss_SumerDischarges_CTC_causal.R")
+  source("Swiss_SumerDischarges_CTCs_routine.R")
   output <- Swiss_SummerDischarges_CTCs_causal(causal_pair=params$causal_pair, precip_causal=params$precip_causal, precip_keyw=params$precip_kw,
                                                n_bootstrap_sims=n_bootstrap_sims, R_test=R_test, thresh_q=thresh_q, mult_k=mult_k, seed=seed, save_path=save_path_causal)
   c(Pmc_npctc=output[["Pmc_npctc"]], Pmc_pfcorr_lgpdctc=output[["Pmc_pfcorr_lgpdctc"]], Pmc_constr_lgpdctc=output[["Pmc_constr_lgpdctc"]],
@@ -130,7 +134,7 @@ results_causal <- foreach(params=params_list_causal, .packages=packages_to_pass,
 results_indep <- foreach(params=params_list_indep, .packages=packages_to_pass, .export=variables_to_pass,
                          .errorhandling="stop", .combine=rbind) %dopar% {
   source("../R_functions/CTC_contribution_functions_OCP.R")
-  source("Swiss_SumerDischarges_CTC_indep.R")
+  source("Swiss_SumerDischarges_CTCs_routine.R")
   output <- Swiss_SummerDischarges_CTCs_indep(indep_pair=params$indep_pair, precip_indep=params$precip_indep, precip_keyw=params$precip_kw,
                                               n_bootstrap_sims=n_bootstrap_sims, R_test=R_test, thresh_q=thresh_q, mult_k=mult_k, seed=seed, save_path=save_path_indep)
   c(Pmc_npctc=output[["Pmc_npctc"]], Pmc_pfcorr_lgpdctc=output[["Pmc_pfcorr_lgpdctc"]], Pmc_constr_lgpdctc=output[["Pmc_constr_lgpdctc"]],
@@ -174,12 +178,57 @@ print(end_time_results - start_time_all)
 
 sink()
 
+cat("\nResults causal stations:\n")
+print(as.data.frame(results_causal_tibble))
+
+cat("\nResults indep stations:\n")
+print(as.data.frame(results_indep_tibble))
+
 results_causal_tibble <- bind_cols(results_causal_tibble0, pair_type="causal", tibble::as_tibble(results_causal))
 results_indep_tibble <- bind_cols(results_indep_tibble0, pair_type="non-causal", tibble::as_tibble(results_indep))
 results_CH_Pmc_all <- bind_rows(results_causal_tibble,results_indep_tibble)
 
 filename <- paste0("Results/results_Station_runner_",format(Sys.time(),'%Y%m%d_%H%M%S'),".csv")
 write_csv(results_CH_Pmc_all, file=filename)
+
+
+## ========================== PARALLEL ===================================
+# library(parallel)
+# nb_cores_total <- detectCores()#12
+# nb_cores_used <- 10#nb_cores-1
+# cl <- makeCluster(nb_cores_used)
+# #folderName <- 'run_all_these3'
+# #files <- list.files(folderName, full.names=TRUE)
+# files <- c("runq01.R","runq02.R","runq03.R","runq04.R","runq05.R",
+#            "runq06.R","runq07.R","runq08.R","runq09.R","runq10.R")
+# parSapply(cl, files, source)
+# stopCluster(cl)
+
+## ======= or =========
+# library(parallel)
+# library(doParallel)
+# nb_cores_total <- detectCores()#12
+# nb_cores_used <- 10#nb_cores-1
+# cl <- makeCluster(nb_cores_used)
+# registerDoParallel(cl)
+# files <- c("doesnotexist.R")
+# foreach(file = files, .export = c("variables", "to_import"), .errorhandling = "remove", .combine=rbind) %dopar% {
+#   source(file)
+# }
+# stopCluster(cl)
+
+## ======= or =========
+# library("doFuture")
+# registerDoFuture()
+# nb_cores_total <- detectCores()#12
+# nb_cores_used <- 10#nb_cores-1
+# cl <- makeCluster(nb_cores_used)
+# plan(cluster, workers = cl)
+# files <- c("doesnotexist.R")
+# foreach(file = files, .export = c("variables", "to_import"), .errorhandling = "remove", .combine=rbind) %dopar% {
+#   source(file)
+# }
+# stopCluster(cl)
 
 
 end_time_all <- Sys.time()
