@@ -1,6 +1,3 @@
-#rm(list = setdiff(ls(), union(lsf.str(), "sims_round")))
-#try(dev.off(dev.list()["RStudioGD"]),silent=TRUE)
-#try(dev.off(),silent=TRUE)
 library(parallel)
 library(doParallel)
 
@@ -178,11 +175,6 @@ print(end_time_results - start_time_all)
 
 sink()
 
-cat("\nResults causal stations:\n")
-print(as.data.frame(results_causal_tibble))
-
-cat("\nResults indep stations:\n")
-print(as.data.frame(results_indep_tibble))
 
 results_causal_tibble <- bind_cols(results_causal_tibble0, pair_type="causal", tibble::as_tibble(results_causal))
 results_indep_tibble <- bind_cols(results_indep_tibble0, pair_type="non-causal", tibble::as_tibble(results_indep))
@@ -191,44 +183,6 @@ results_CH_Pmc_all <- bind_rows(results_causal_tibble,results_indep_tibble)
 filename <- paste0("Results/results_Station_runner_",format(Sys.time(),'%Y%m%d_%H%M%S'),".csv")
 write_csv(results_CH_Pmc_all, file=filename)
 
-
-## ========================== PARALLEL ===================================
-# library(parallel)
-# nb_cores_total <- detectCores()#12
-# nb_cores_used <- 10#nb_cores-1
-# cl <- makeCluster(nb_cores_used)
-# #folderName <- 'run_all_these3'
-# #files <- list.files(folderName, full.names=TRUE)
-# files <- c("runq01.R","runq02.R","runq03.R","runq04.R","runq05.R",
-#            "runq06.R","runq07.R","runq08.R","runq09.R","runq10.R")
-# parSapply(cl, files, source)
-# stopCluster(cl)
-
-## ======= or =========
-# library(parallel)
-# library(doParallel)
-# nb_cores_total <- detectCores()#12
-# nb_cores_used <- 10#nb_cores-1
-# cl <- makeCluster(nb_cores_used)
-# registerDoParallel(cl)
-# files <- c("doesnotexist.R")
-# foreach(file = files, .export = c("variables", "to_import"), .errorhandling = "remove", .combine=rbind) %dopar% {
-#   source(file)
-# }
-# stopCluster(cl)
-
-## ======= or =========
-# library("doFuture")
-# registerDoFuture()
-# nb_cores_total <- detectCores()#12
-# nb_cores_used <- 10#nb_cores-1
-# cl <- makeCluster(nb_cores_used)
-# plan(cluster, workers = cl)
-# files <- c("doesnotexist.R")
-# foreach(file = files, .export = c("variables", "to_import"), .errorhandling = "remove", .combine=rbind) %dopar% {
-#   source(file)
-# }
-# stopCluster(cl)
 
 
 end_time_all <- Sys.time()
