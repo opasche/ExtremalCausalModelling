@@ -1,13 +1,20 @@
 ## Causal tail coefficient estimators and causality permutation Monte Carlo test.
-## Code for the methodology described in the article by:
+## Code for the methodology described in the article:
 ## Olivier C. Pasche, Valerie Chavez-Demoulin, and Anthony C. Davison. 2021.
+## Causal Modelling of Heavy-Tailed Variables and Confounders with Application to River Flow
+## https://arxiv.org/abs/2110.06686
 ## Created by Olivier Colin PASCHE, EPFL Lausanne (CH), Spring and Autumn 2020.
 
-#library(tidyverse)
+# libraries
 library("evd")
 library("ismev")
-library(causalXtreme)
+library(causalXtreme) # code by Gnecco et al. (2019)
 
+library(maxLik)
+
+library(boot)
+
+# Script Dependencies
 source("../R_functions/utils.R")
 source("../R_functions/Modified_gpd_fitting.R")
 source("../R_functions/Bootstrap_helpers.R")
@@ -270,7 +277,7 @@ expGPD_causal_tail_coeff <- function(X1, X2, H, k = NULL, threshold_q = 0.95, pa
 
 ## CAUSALITY PERMUTATION MONTE CARLO TEST
 
-CTC_causality_permutation_test <- function(X1, X2, H=NULL, k=floor(NROW(data)^0.4), R=10000, constrained_fit=FALSE, threshold_q = 0.95, both_tails=FALSE, parametric_F1=TRUE){
+CTC_causality_permutation_test <- function(X1, X2, H=NULL, k=floor(NROW(X1)^0.4), R=10000, constrained_fit=FALSE, threshold_q = 0.95, both_tails=FALSE, parametric_F1=TRUE){
   n <- NROW(X1) # number of observations
   if(is.null(k)){
     k<-floor(n ^ 0.4)
@@ -352,7 +359,7 @@ CTC_causality_permutation_test <- function(X1, X2, H=NULL, k=floor(NROW(data)^0.
   return(list(Pmc=Pmc, ctc12=ctc12, ctc21=ctc21, diff12=diff12, ctc12p=ctc12p, ctc21p=ctc21p, diff12p=diff12p))
 }
 
-expGPD_CTC_causality_permutation_test <- function(X1, X2, H, k=floor(NROW(data)^0.4), R=10000, threshold_q = 0.95, both_tails=FALSE, parametric_F1=TRUE){
+expGPD_CTC_causality_permutation_test <- function(X1, X2, H, k=floor(NROW(X1)^0.4), R=10000, threshold_q = 0.95, both_tails=FALSE, parametric_F1=TRUE){
   n <- NROW(X1) # number of observations
   if(is.null(k)){
     k<-floor(n ^ 0.4)

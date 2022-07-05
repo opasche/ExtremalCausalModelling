@@ -1,5 +1,5 @@
 
-library(boot)
+#library(boot)
 
 ## Bootstrap helpers
 
