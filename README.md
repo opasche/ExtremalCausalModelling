@@ -1,12 +1,13 @@
 # Causal Modelling of Heavy-Tailed Variables and Confounders with Application to River Flow
 
-Repository for the homonym paper, by O. C. Pasche, V. Chavez-Demoulin and A. C. Davison ([arXiv:2110.06686](https://arxiv.org/abs/2110.06686)).
+Repository for the homonym paper, by O. C. Pasche, V. Chavez-Demoulin and A. C. Davison, published in *Extremes*.
+* Publication available in open access at: [https://doi.org/10.1007/s10687-022-00456-4](https://doi.org/10.1007/s10687-022-00456-4).
+* Arxiv: [arXiv:2110.06686](https://arxiv.org/abs/2110.06686).
 
 
 ## Abstract
 
-Confounding variables are a recurrent challenge for causal discovery and inference. In many situations, complex causal mechanisms only manifest themselves in extreme events, or take simpler forms in the extremes.  Stimulated by data on extreme river flows and precipitation, we introduce a new causal discovery methodology for heavy-tailed variables that allows the use of a known potential confounder as a covariate and allows its effect to be almost entirely removed when the variables have comparable tails, and also decreases it sufficiently to enable correct causal inference when the confounder has a heavier tail.
-We introduce a new parametric estimator for the existing causal tail coefficient and a permutation test. Simulations show that the methods work well and the ideas are applied to the motivating dataset.
+Confounding variables are a recurrent challenge for causal discovery and inference. In many situations, complex causal mechanisms only manifest themselves in extreme events, or take simpler forms in the extremes.  Stimulated by data on extreme river flows and precipitation, we introduce a new causal discovery methodology for heavy-tailed variables that allows the effect of a known potential confounder to be almost entirely removed when the variables have comparable tails, and also decreases it sufficiently to enable correct causal inference when the confounder has a heavier tail.  We also introduce a new parametric estimator for the existing causal tail coefficient and a permutation test. Simulations show that the methods work well and the ideas are applied to the motivating dataset.
 
 
 ## Repository contents
