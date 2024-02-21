@@ -31,7 +31,7 @@ The `./Switzerland/` folder contains the code and results related to the explora
 - `Stations_runner.R` runs the causal analysis functions for a list of given station pairs.
 - `Swiss_SumerDischarges_estims_plots.R` creates some summary plots and shape parameter estimates analyses. 
 - The `Results/` subfolders contain some outputs from the python and R codes, such as the interactive maps in .html format (need to be downloaded and opened in a web-browser), and results discussed in the paper.
-- The `Data/` subfolder should contain the Swiss river discharge dataset (`river_dat.Rdata`) and Swiss precipitation dataset (`precip.csv`). We unfortunately do not have rights to share them directly here, but they are available to academics uppon request, from the [Swiss Federal Office for the Environment (FOEN)](https://www.hydrodaten.admin.ch/) and [MeteoSwiss](https://gate.meteoswiss.ch/idaweb), respectively. Some additional processed data is then output in the `data_wrangled/` subfolder by, in particular, `Stations_webscraping.ipynb` and `RData_to_csv.R`.
+- The `Data/` subfolder should contain the Swiss river discharge dataset (`river_dat.Rdata`) and Swiss precipitation dataset (`precip.csv`). We unfortunately do not have rights to share them directly here, but they are available to academics upon request, from the [Swiss Federal Office for the Environment (FOEN)](https://www.hydrodaten.admin.ch/) and [MeteoSwiss](https://gate.meteoswiss.ch/idaweb), respectively. Some additional processed data is then output in the `data_wrangled/` subfolder by, in particular, `Stations_webscraping.ipynb` and `RData_to_csv.R`.
 
 
 By Olivier C. PASCHE\
